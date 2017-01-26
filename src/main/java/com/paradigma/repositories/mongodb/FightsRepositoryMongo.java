@@ -46,7 +46,8 @@ public class FightsRepositoryMongo implements FightsRepository {
 	
 	private FightModel transformFightMongoToModel(FightMongo fightMongo) {
 		
-		PlayerModel playerModel = new PlayerModel(fightMongo.getHomeFighter().getPlayerId());
+		PlayerModel playerModel = new PlayerModel();
+		playerModel.setId(fightMongo.getHomeFighter().getPlayerId());
 		
 		FighterModel fighterModel = new FighterModel();
 		BeanUtils.copyProperties(fightMongo.getHomeFighter(), fighterModel);

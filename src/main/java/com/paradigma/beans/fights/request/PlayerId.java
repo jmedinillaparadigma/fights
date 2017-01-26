@@ -1,13 +1,16 @@
-package com.paradigma.model;
+package com.paradigma.beans.fights.request;
+
+import javax.validation.constraints.NotNull;
 
 import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
 
 /**
- * Player model bean
+ * Player request bean
  * @author jmedinilla
  */
 
@@ -16,10 +19,9 @@ import lombok.ToString;
 @AllArgsConstructor
 @NoArgsConstructor
 @ToString
-public class PlayerModel {
+public class PlayerId {
 	
+	@ApiModelProperty(value = "Player identifier", example="1", required=true)
+	@NotNull
 	private String id;
-	private String userId;
-	private String userName;
-	private CharacterModel character;
 }

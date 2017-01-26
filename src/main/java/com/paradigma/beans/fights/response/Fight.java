@@ -1,4 +1,4 @@
-package com.paradigma.beans.response;
+package com.paradigma.beans.fights.response;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;

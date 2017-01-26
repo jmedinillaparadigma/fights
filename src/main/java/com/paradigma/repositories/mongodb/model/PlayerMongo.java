@@ -1,4 +1,6 @@
-package com.paradigma.model;
+package com.paradigma.repositories.mongodb.model;
+
+import org.springframework.data.mongodb.core.mapping.Document;
 
 import io.swagger.annotations.ApiModel;
 import lombok.AllArgsConstructor;
@@ -7,7 +9,7 @@ import lombok.NoArgsConstructor;
 import lombok.ToString;
 
 /**
- * Player model bean
+ * This class represents a Player stored in mongodb
  * @author jmedinilla
  */
 
@@ -16,10 +18,11 @@ import lombok.ToString;
 @AllArgsConstructor
 @NoArgsConstructor
 @ToString
-public class PlayerModel {
+@Document(collection="players")
+public class PlayerMongo {
 	
 	private String id;
 	private String userId;
 	private String userName;
-	private CharacterModel character;
+	private CharacterMongo character;
 }

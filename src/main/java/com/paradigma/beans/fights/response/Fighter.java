@@ -1,4 +1,4 @@
-package com.paradigma.beans.response;
+package com.paradigma.beans.fights.response;
 
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
@@ -20,7 +20,7 @@ import lombok.ToString;
 public class Fighter {
 	
 	@ApiModelProperty(value = "Player", example="{Player}", required=true)
-	private Player player;
+	private PlayerRef player;
 	
 	@ApiModelProperty(value = "Stretegy selected for the fight", example="{Strategy}", required=true)
 	private Strategy strategy;

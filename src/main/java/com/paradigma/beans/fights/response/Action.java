@@ -1,4 +1,4 @@
-package com.paradigma.beans.response;
+package com.paradigma.beans.fights.response;
 
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;

@@ -1,4 +1,4 @@
-package com.paradigma.beans.response;
+package com.paradigma.beans.fights.response;
 
 import java.util.List;
 

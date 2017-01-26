@@ -25,56 +25,67 @@ import springfox.documentation.spi.DocumentationType;
 import springfox.documentation.spring.web.plugins.Docket;
 import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
+/**
+ * Spring Boot Application class
+ * @author jmedinilla
+ */
 @SpringBootApplication
 @EnableSwagger2
-public class FightsApplication {
+public class MeetupApplication {
 
 	@Autowired
 	private TypeResolver typeResolver;
-	
+
 	@Value("${app.version}")
 	private String appVersion;
-	
+
 	public static void main(String[] args) {
-		SpringApplication.run(FightsApplication.class, args);
+		SpringApplication.run(MeetupApplication.class, args);
 	}
+
 	
 	/**
-	 * Initialization of the SpringFox Swagger
+	 * Initialization of the SpringFox Swagger for Fights controller
 	 * @return {@link Docket} object
 	 */
 	@Bean
 	public Docket swaggerApi() {
-		return new Docket(DocumentationType.SWAGGER_2)
-				.select()
-				.apis(RequestHandlerSelectors
-						.basePackage("com.paradigma.web"))
-				.paths(regex("/fights/.*"))
-				.build()
-				.pathMapping("/")
-				.genericModelSubstitutes(ResponseEntity.class)
-				.alternateTypeRules(
-						newRule(typeResolver.resolve(DeferredResult.class,
-								typeResolver.resolve(ResponseEntity.class,WildcardType.class)), 
-								typeResolver.resolve(WildcardType.class)))
+		return createDocket("Fights", "/api/fights/.*");
+	}
+
+	/**
+	 * Initialization of the SpringFox Swagger for Players controller
+	 * @return {@link Docket} object
+	 */
+	@Bean
+	public Docket swaggerPlayersApi() {
+		return createDocket("Players", "/api/players/.*");
+	}
+	
+	
+	
+	/////////////////////////////
+	// Private functions
+	///////////////////////////
+	
+	private Docket createDocket(String groupName, String regex){
+		return new Docket(DocumentationType.SWAGGER_2).groupName(groupName).select()
+				.apis(RequestHandlerSelectors.basePackage("com.paradigma.web")).paths(regex(regex)).build()
+				.pathMapping("/").genericModelSubstitutes(ResponseEntity.class)
+				.alternateTypeRules(newRule(
+						typeResolver.resolve(DeferredResult.class,
+								typeResolver.resolve(ResponseEntity.class, WildcardType.class)),
+						typeResolver.resolve(WildcardType.class)))
 				.useDefaultResponseMessages(false)
-				.globalResponseMessage(
-						RequestMethod.GET,
-						newArrayList(new ResponseMessageBuilder().code(500)
-								.message("500 message")
+				.globalResponseMessage(RequestMethod.GET,
+						newArrayList(new ResponseMessageBuilder().code(500).message("500 message")
 								.responseModel(new ModelRef("Error")).build()))
-				.enableUrlTemplating(false)
-				.apiInfo(apiInfo());
+				.enableUrlTemplating(false).apiInfo(apiInfo());
 	}
 
 	private ApiInfo apiInfo() {
 
-		return new ApiInfo("Fights API Documentation",
-						   "Fights API",
-						   appVersion, 
-						   "Terms of service", 
-						   new Contact("", "", ""), 
-						   "License of API",
-						     "API license URL");
+		return new ApiInfo("Meetup battle game API Documentation", "Meetup battle game API", appVersion,
+				"Terms of service", new Contact("", "", ""), "License of API", "API license URL");
 	}
 }

@@ -13,9 +13,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.paradigma.beans.request.Player;
-import com.paradigma.beans.response.Fight;
-import com.paradigma.beans.response.Fighter;
+import com.paradigma.beans.fights.request.PlayerId;
+import com.paradigma.beans.fights.response.Fight;
+import com.paradigma.beans.fights.response.Fighter;
 import com.paradigma.model.FightModel;
 import com.paradigma.model.PlayerModel;
 import com.paradigma.services.FightsService;
@@ -31,7 +31,7 @@ import lombok.extern.slf4j.Slf4j;
  * @author jmedinilla
  */
 @Api(value = "Fights management service")
-@RequestMapping("/fights")
+@RequestMapping("/api/fights")
 @RestController
 @Slf4j
 public class FightsController {
@@ -47,14 +47,14 @@ public class FightsController {
 	@ApiOperation(value = "Requests a fight for a player")
 	@ApiResponses(value = {
 			@ApiResponse(code = 200, message = "Return an alredy registered fight for the provided player", response = Fight.class),
-			@ApiResponse(code = 201, message = "Creates a new fight a register the provide player successfuly", response = Fight.class),
+			@ApiResponse(code = 201, message = "Creates a new fight a register the provided player successfuly", response = Fight.class),
 			@ApiResponse(code = 400, message = "Bad request"),
 			@ApiResponse(code = 424, message = "Failed external dependecy"),
 			@ApiResponse(code = 500, message = "Server error") })
 	@RequestMapping(value = "/", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<Fight> createFight(
 			@RequestHeader("Authorization") String token,
-			@RequestBody(required=true) @Valid Player playerRequest) {
+			@RequestBody(required=true) @Valid PlayerId playerRequest) {
 
 		log.info("POST -> /fights {}", playerRequest);
 		
@@ -73,7 +73,7 @@ public class FightsController {
 	//////////////////////////////
 	
 	private Fight transformFightModelToReturn(FightModel fightModel) {
-		com.paradigma.beans.response.Player playerReturn = new com.paradigma.beans.response.Player();
+		com.paradigma.beans.fights.response.PlayerRef playerReturn = new com.paradigma.beans.fights.response.PlayerRef();
 		BeanUtils.copyProperties(fightModel.getHomeFighter().getPlayer(), playerReturn);
 		
 		Fighter fighterReturn = new Fighter();
@@ -87,7 +87,7 @@ public class FightsController {
 		return fightReturn;
 	}
 	
-	private PlayerModel transformPlayer(Player source) {
+	private PlayerModel transformPlayer(PlayerId source) {
 		PlayerModel target = new PlayerModel();
 		BeanUtils.copyProperties(source, target);
 		

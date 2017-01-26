@@ -1,5 +1,6 @@
-package com.paradigma.beans.request;
+package com.paradigma.beans.players.request;
 
+import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 
 import io.swagger.annotations.ApiModel;
@@ -10,7 +11,7 @@ import lombok.NoArgsConstructor;
 import lombok.ToString;
 
 /**
- * Player request bean
+ * Player creation request bean
  * @author jmedinilla
  */
 
@@ -19,9 +20,14 @@ import lombok.ToString;
 @AllArgsConstructor
 @NoArgsConstructor
 @ToString
-public class Player {
+public class PlayerCreation {
 	
-	@ApiModelProperty(value = "Player identifier", example="1", required=true)
+	@ApiModelProperty(value = "User name", example="john", required=true)
 	@NotNull
-	private String id;
+	private String userName;
+	
+	@ApiModelProperty(value = "Character slected for the player", example="{Character}", required=true)
+	@NotNull
+	@Valid
+	private CharacterCreation character;
 }
