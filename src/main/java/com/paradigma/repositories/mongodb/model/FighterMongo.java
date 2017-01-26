@@ -16,6 +16,6 @@ import lombok.ToString;
 @ToString
 public class FighterMongo {
 	
-	private PlayerMongo player;
+	private String playerId;
 	private StrategyMongo strategy;
 }

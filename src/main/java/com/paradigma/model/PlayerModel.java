@@ -19,7 +19,4 @@ import lombok.ToString;
 public class PlayerModel {
 	
 	private String id;
-	private String userId;
-	private String userName;
-	private CharacterModel character;
 }

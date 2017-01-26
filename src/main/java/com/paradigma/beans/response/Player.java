@@ -21,13 +21,4 @@ public class Player {
 	
 	@ApiModelProperty(value = "Player identifier", example="1", required=true)
 	private String id;
-	
-	@ApiModelProperty(value = "User identifier", example="001", required=true)
-	private String userId;
-	
-	@ApiModelProperty(value = "User name", example="john", required=true)
-	private String userName;
-	
-	@ApiModelProperty(value = "Character slected for the player", example="{Charater}", required=true)
-	private Character character;
 }

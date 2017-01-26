@@ -31,7 +31,7 @@ public class Fight {
 	@ApiModelProperty(value = "Away fighter of the fight", example="{Fight}", required=true)
 	private Fighter awayFighter;
 	
-	@ApiModelProperty(value = "Character slected for the player", example="{Charater}", required=true)
+	@ApiModelProperty(value = "Character slected for the player", example="{Fight}", required=true)
 	@JsonInclude(Include.NON_NULL)
 	private Fighter winner;
 }

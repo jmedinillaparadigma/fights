@@ -1,7 +1,5 @@
 package com.paradigma.services.impl;
 
-import javax.management.InstanceNotFoundException;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -26,20 +24,7 @@ public class FightsServiceDefault implements FightsService {
 	 */
 	@Override
 	public FightModel requestFight(PlayerModel playerModel) {
-		return repository.requestFight(playerModel);
+		// Case 1: Creates a new Fight
+		return repository.createFight(playerModel);
 	}
-
-	/**
-	 * This method gets a player by its id
-	 * @return The Player with the provided id
-	 * @throws InstanceNotFoundException 
-	 */
-//	@Override
-//	public PlayerModel getPlayerById(String id) throws InstanceNotFoundException {
-//		return repository.getPlayerById(id);
-//	}
-	
-	
-	
-
 }
